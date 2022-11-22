@@ -1,0 +1,67 @@
+{% extends 'quiz/main.html' %}
+
+{% block content %}
+    <section>
+
+
+        
+
+        <div class="container">
+          <h1>Sessions en cours</h1>
+
+            <table class="table table-dark table-hover ">
+                <thead class="thead-light">
+                <tr>
+                  <th>N° Session</th>
+                  <th>N° Quizz</th>
+                  <th>Date création</th>
+                  <th>Date expiration</th>
+                  <th>Type</th>
+                  <th>Timer</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+            </thead>
+        {%for x in session%}
+        
+        <tbody>
+          <tr>
+            <td>Session n°{{ x.idsession }}</td>
+            <td>Quizz n°{{ x.idquizz_id }}</td>     
+              <td>{{ x.datecreation|date:"Y-m-d" }}</td>
+            <td>{{ x.dateexpiration |date:"Y-m-d" }}</td>
+           
+             {% if x.evaluation%}
+            <td> Évaluation</td>
+            {% endif %} 
+            {% if not x.evaluation%}
+            <td> Entraînement</td>
+            {% endif %} 
+            <td>{{ x.timer }}</td>
+            <td> <a class="btn btn-primary" href="assigner/{{x.idsession}}" role="button">Assigner</a>  </td>  
+            <td><a class="btn btn-warning" href="modification/{{x.idsession}}" role="button">Modifier</a></td>
+            <td> <a class="btn btn-danger" href="delete/{{x.idsession}}" role="button" onclick="return confirm('Êtes-vous sûr?')" >Effacer</a>  </td>
+            
+          </tr>
+        </tbody>
+            {% endfor %}
+           
+        </table>
+          </div>
+
+          <footer class="container">
+            <div class="row m-2">
+              <a href="addsession/" class="col-sm mx-5 btn btn-success " role="button" data-bs-toggle="button" aria-pressed="true">Créer une session</a>
+              <a href="accueil" class="col-sm mx-5 btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+              {% comment %} <a href="#" class="col-sm mx-5 btn btn-primary " role="button" data-bs-toggle="button" aria-pressed="true">Modifier un quizz</a> {% endcomment %}
+            </div>
+        </footer>
+
+    </section>
+
+
+    
+
+
+{% endblock %}

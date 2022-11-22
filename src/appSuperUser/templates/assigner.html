@@ -1,0 +1,143 @@
+{% extends 'quiz/main.html' %}
+
+{% block header %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/session.css"  %}" />
+
+{% endblock%}
+
+
+{% block content %}
+
+<section>
+
+    <div class="container">
+<h1>Assigner Collaborateurs à cette session</h1>
+
+<table class="table table-dark table-hover w-auto ">
+  <thead class="thead-light">
+  <tr>
+    <th>N° Session</th>
+    <th>N° Quizz</th>
+    <th>Date création</th>
+    <th>Date expiration</th>
+    <th>Type</th>
+    <th>Timer</th>
+    
+    
+  </tr>
+</thead>
+
+
+<tbody>
+<tr>
+<td>Session n°{{ session.idsession }}</td>
+<td>Quizz n°{{ session.idquizz_id }}</td>     
+<td>{{ session.datecreation|date:"Y-m-d" }}</td>
+<td>{{ session.dateexpiration |date:"Y-m-d" }}</td>
+
+{% if session.evaluation%}
+<td> Évaluation</td>
+{% endif %} 
+{% if not session.evaluation%}
+<td> Entraînement</td>
+{% endif %} 
+<td>{{ session.timer }}</td>
+
+</tr>
+</tbody>
+
+
+</table>
+
+<div class="row">
+  <div class="col">
+ <h4>Collaborateurs non assignés</h4>
+<table class="table table-dark table-hover w-auto ">
+ 
+{%for n in qp%}
+<tbody>
+  <tr>
+  <td>Matricule n°{{ n }}</td>
+
+  <td> <a class="btn btn-success" href="ajouter/{{n}}" role="button">Assigner</a>  </td>
+
+  </tr>
+  </tbody>
+  {% endfor %}
+  
+  </table>
+</div>
+<div class="col">
+  <h4>Collaborateurs actuellement assignés</h4>
+  <table class="table table-dark table-hover w-auto ">
+    <thead class="thead-light">
+    <tr>
+      <th>Matricule</th>
+      <th>Score</th>
+      <th>Date Participation</th>
+      <th></th>
+    </tr>
+  </thead>
+  {%for x in histo%}
+  <tbody>
+    <tr>
+    <td>Matricule n°{{ x.matricule_id }}</td>
+    <td>{{ x.idquizz_id }}</td>     
+    <td>{{ x.datecreation|date:"Y-m-d" }}</td>
+    <td> <a class="btn btn-danger" href="delete/{{x.idhisto}}" role="button" onclick="return confirm('Êtes-vous sûr?')" >Retirer</a>  </td>
+  
+    </tr>
+    </tbody>
+    {% endfor %}
+    
+    </table>
+  </div>
+</div>
+
+{% comment %} <form action="done/{{ session.idsession }}" method="post">
+{% csrf_token %}
+<div class="multiselect">
+    <div class="selectBox" onclick="showCheckboxes()">
+      <select name='collab'>
+        <option>Sélectionner les collaborateurs</option>
+      </select>
+      <div class="overSelect"></div>
+    </div>
+    <div id="checkboxes">
+        {% for n in qp%}
+        <label for="{{n}}">
+            <input name='CC' type="checkbox" id="{{n}}" value="{{ n }}" />{{n}}</label>
+        {%endfor%}  
+    </div>
+  </div>
+  <br>
+  <input type="submit" value="Valider">
+  </form> {% endcomment %}
+
+</div>
+</section>
+
+<footer class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+       
+      </div>
+      <div class="col-sm m-5">
+        <a href="../gestion-session" class=" btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+
+      </div>
+      <div class="col-sm">
+       
+      </div>
+    </div>
+  </div>
+  
+ 
+</footer>
+
+
+
+
+{% endblock %}

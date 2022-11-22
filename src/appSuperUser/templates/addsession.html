@@ -1,0 +1,73 @@
+{% extends 'quiz/main.html' %}
+
+{% block header %}
+{% load static %}
+<link rel="stylesheet" href="{% static "css/session.css"  %}" />
+
+{% endblock%}
+
+{% block content %}
+
+
+<section>
+
+    <div class="container">
+<h1>Créer une session</h1>
+
+<form action="addrecord/" method="post">
+{% csrf_token %}
+<select name="nquizz">
+    <option disabled="true" selected> Choisir un Quizz </option>
+    {% for q in qz%}
+    
+    <option >{{q}}</option>
+    {%endfor%}  
+    
+</select>
+<br><br>
+Date:<br>
+<input name="dateC">
+<br><br>
+Date expiration:<br>
+<input name="dateE">
+<br><br>
+Évaluation ?
+<input  type="hidden" value="False" name="eva">
+<input  type="checkbox" value="True" name="eva">
+
+<br><br>
+Timer:<br>
+<input name="timer">
+<br>
+  <br>
+<input type="submit" value="Valider">
+</form>
+
+</div>
+<footer class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+       
+      </div>
+      <div class="col-sm m-5">
+        <a href="../gestion-session" class=" btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+
+      </div>
+      <div class="col-sm">
+       
+      </div>
+    </div>
+  </div>
+  
+ 
+</footer>
+
+
+</section>
+
+
+
+
+
+{% endblock %}

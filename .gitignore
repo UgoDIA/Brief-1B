@@ -1,0 +1,12 @@
+*.pyc
+__pycache__
+db.sqlite3
+/env
+*.env
+.vscode
+.env
+quiz\__pycache__
+identification\__pycache__
+appCollab\__pycache__
+appSuperUser\__pycache__
+intranet\__pycache__

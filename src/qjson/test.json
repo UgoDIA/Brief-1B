@@ -1,0 +1,55 @@
+{
+    "questionnaire": {
+      "@notemini": "75",
+      "question": [
+        {
+          "@bonne": "3",
+          "@duree": "00:00:30.00",
+          "@coeff": "1",
+          "titre": "Elément d'échafaudage de pieds",
+          "intitule": "Un camarteau est :",
+          "listerep": {
+            "reponse": [
+              "Un outil spécial de coffreur",
+              "Une situation de travail difficile à vivre",
+              "Une semelle d'échafaudage tubulaire"
+            ]
+          },
+          "feedback": "Monter un échafaudage de pieds"
+        },
+        {
+          "@bonne": "3",
+          "@duree": "00:00:30.00",
+          "@coeff": "1",
+          "titre": "Elément d'échafaudage de pieds",
+          "intitule": "Un échafaudage préfabriqué :",
+          "listerep": {
+            "reponse": [
+              "Peut être bâché sans l'accord du constructeur",
+              "Ne doit jamais être amarré",
+              "Doit être amarré tous les 10 m2 environ, s'il est bâché",
+              "Doit être amarré tous les 30 m2, s'il est bâché"
+            ]
+          },
+          "feedback": "Monter un échafaudage de pieds"
+        },
+        {
+          "@bonne": "2",
+          "@duree": "00:00:30.00",
+          "@coeff": "2",
+          "titre": "Informations pour bâtir",
+          "intitule": "Pour bâtir une pointe de pignon, il faut :",
+          "listerep": {
+            "reponse": [
+              "Connaître la longueur du pavillon et sa hauteur totale",
+              "Connaître la largeur du pavillon et la cote de niveau de la pointe",
+              "Connaître la dimension de l'embase de la pointe, la hauteur de la pointe ainsi que la position du faîtage",
+              "Que le faîtage soit toujours dans l'axe du pignon"
+            ]
+          },
+          "feedback": "Extraire d'un plan les informations pour bâtir"
+        }
+        
+      ]
+    }
+  }

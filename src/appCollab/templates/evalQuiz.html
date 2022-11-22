@@ -1,0 +1,111 @@
+{% extends 'quiz/main.html' %}
+
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timer.css' %}">
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous" defer></script> 
+    <script type="text/javascript" src="{% static 'js/timer.js' %}" defer></script>
+    <script type="text/javascript" src="{% static 'js/quizz.js' %}" defer></script>
+ 
+{% endblock %}
+{% block content %}
+<section>
+
+
+        
+
+    <div class="container">
+
+    <h1>QUIZ</h1>
+
+    <div id="container-quiz">
+
+        <div id="container-header">
+            <div id="app"></div>  <!-- tag du compte à rebours pour une question  -->
+            <p id="titre">  </p> 
+            <p id="intitule"> </p>
+        </div>
+
+        <div id="container-reponses">
+        </div>
+
+        <form id="myForm" method="POST">
+            {% csrf_token %}
+            <button id="valider" type="submit">Valider</button>
+        </form>
+
+    </div>
+
+    <!-- Déclaration des variables -->
+    <script type="text/javascript"> 
+                                                            // id
+        let timerQuestion = {{duree}};                      // app
+        let titre         = "{{titre|safe}}";               // titre
+        let intitule      = "{{intitule|safe}}";            // intitule
+        let listRep       = {{reponses|safe}};              // container-reponses - quizz.js l.59-65
+        let numQuestion   = parseInt({{numQuestion}});      // titre              - quizz.js l.56
+        const totalQ      = "{{totalQ}}";                   // titre              - quizz.js l.56
+
+/* Send data to the view after clicking the Submit button
+*/
+        const form = document.getElementById('myForm')
+
+        form.addEventListener('submit', sendData);
+        function sendData(event){
+                event.preventDefault();
+                form.disabled = true; // Prevents information from being out of synchronization with the server
+                                      //   by disabling the button so that the user is not the way to spam it.
+                onTimesUp()  // Stop the setInterval method
+                const csrf  = $('input[name="csrfmiddlewaretoken"]').val()   // collect token
+                const respUser = isChecked()
+                // ------------------- Send data to view -------------------
+                $.ajax({
+                    type: "POST",
+                    url: 'nextQuestion', // Name of the django view that will retrieve the data
+                    data: {
+                        csrfmiddlewaretoken : csrf,
+                        "result": respUser,       // data to send
+                    },
+                    dataType: "json",
+                    // ------------------- Receiving data from the view -------------------
+                    success: function (data) { // if send successful 
+                        numQuestion   = data["data"]["numQuestion"]
+                        console.log(numQuestion + "<" + totalQ)
+                        if(numQuestion < totalQ){
+                            // Update variables with the new data received
+                            timerQuestion = data["data"]["duree"]
+                            titre         = data["data"]["titre"]
+                            intitule      = data["data"]["intitule"]
+                            listRep       = data["data"]["reponses"]
+                            updateTag()  // Updates fields with the update variables
+                            initTimer()  // Resets the variables concerning the countdown 
+                            startTimer() // Start the countdown
+                            form.disabled = false;
+                        }
+                        else {
+                            window.location.assign("{%url 'score'%}")
+                        }
+                    
+                    },
+                    failure: function () {
+                        alert("failure");
+                    }
+                })
+        }
+
+    </script>
+
+
+</div>
+
+    
+
+</section>
+
+
+{% endblock %}

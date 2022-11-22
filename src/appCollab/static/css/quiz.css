@@ -1,0 +1,39 @@
+
+#container {
+    grid: auto-flow / 1fr 1fr 1fr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#container-quiz{
+  width: 60%;
+}
+
+#container-header{
+
+}
+
+#app{
+
+}
+
+#titre{
+
+}
+
+#intitule{
+
+}
+
+#container-reponses{
+}
+
+#reponse{
+
+}
+
+#labRep{
+
+}

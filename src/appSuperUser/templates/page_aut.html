@@ -1,0 +1,13 @@
+{% extends 'quiz/main.html' %}
+
+
+
+{% block content %}
+        <div class="container col-1 w-50 mx-auto">
+            <form>
+            <a class="row-lg w-100 py-3 my-3 btn btn-primary" href="{% url 'tbd' %}" role="button">Gestionnaire de session</a>
+            <a class="row-lg w-100 py-3 my-3 btn btn-primary" href="uploadQuizz" role="button">Importer des Quizz</a>
+            <a class="row-lg w-100 py-3 my-3 btn btn-primary" href="{% url 'ajoutEmp' %}" role="button">Ajouter des collaborateurs</a>
+            </form>
+        </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'quiz/main.html' %}
+
+{% block content %}
+
+    <div class="container">
+      <h2> Import de quizz </h2>
+      <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="upQuizz" class="btn btn-primary btn-block btn-outlined">Sélectionner les quizz</label>
+    <input type="file" id='upQuizz' name="document" multiple style="display: none">
+    <button type ="submit" id='btUp' class="btn btn-primary btn-block btn-outlined"> Uploader les quizz </button>
+      </form>
+     <div>
+      {% if noms %}
+      <p><h4> quizz uploadés : </h4></p>
+      {% for n in noms%}
+      <p> {{n}} </p>
+      {%endfor%}
+      {% endif %}
+     </div>
+    </div>
+    
+    <footer class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+           
+          </div>
+          <div class="col-sm m-5">
+            <a href="../accueil" class=" btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+    
+          </div>
+          <div class="col-sm">
+           
+          </div>
+        </div>
+      </div>
+      
+     
+    </footer>
+{% comment %} 
+
+    <div class="container">
+        <div class="row m-5">
+        <a href="#" class="col-sm mx-5 btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">enregristrer</a>
+        </div>
+
+    </div> {% endcomment %}
+
+
+
+
+
+{% endblock %}

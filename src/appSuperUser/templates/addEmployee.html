@@ -1,0 +1,68 @@
+{% extends 'quiz/main.html' %}
+
+{% load static %}
+
+{% block header %}
+    <script
+			  src="https://code.jquery.com/jquery-3.6.1.min.js"
+			  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+			  crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js" defer></script>
+    <script src="{% static 'js/readCSV.js' %}"   defer></script>
+    <script src="{% static 'js/editTable.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/addEmp.css'  %}" />
+
+{% endblock%}
+
+{% block content %}
+    <h1> Ajout d'employé </h1>
+
+    <input type="file" id="csvFile" accept=".csv" />
+
+
+    <div id="wrapper">
+       <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
+      <!-- <thead> -->
+          <tr>
+             <th>Prénom</th>
+             <th>Nom</th>
+             <th>Matricule</th>
+		   <th>Password</th>
+          </tr>
+      <!-- </thead> -->
+          <tr>
+             <td> <input type="text" id="new_name">    </td>
+             <td> <input type="text" id="new_country"> </td>
+             <td> <input type="text" id="new_age">     </td>
+		   <td> <input type="text" id="new_pwd">     </td>
+             <td id="tdbutton"> <input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+          </tr>
+       </table>
+    </div>
+
+    <form id="myForm" method="POST">
+        {% csrf_token %}
+        <button type="submit">Envoyer</button>
+    </form>
+
+
+    <footer class="container">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+             
+            </div>
+            <div class="col-sm m-5">
+              <a href="accueil" class=" btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+      
+            </div>
+            <div class="col-sm">
+             
+            </div>
+          </div>
+        </div>
+        
+       
+      </footer>
+
+{% endblock %}

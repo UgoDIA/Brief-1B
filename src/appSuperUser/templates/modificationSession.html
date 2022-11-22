@@ -1,0 +1,62 @@
+{% extends 'quiz/main.html' %}
+
+{% block content %}
+<section>
+
+    <div class="container">
+<h1>Update Session</h1>
+
+<form action="updaterecord/{{ session.idsession }}" method="post">
+{% csrf_token %}
+Changer de quizz:
+<select name="nquizz">
+    <option selected>{{ session.idquizz_id }}  </option>
+    {% for q in qz%}
+    <option>{{q}}</option>
+    {%endfor%}  
+</select>
+<br><br>
+Date création:<br>
+<input name="dateC" value="{{ session.datecreation|date:"Y-m-d" }}">
+<br><br>
+Date Expiration:<br>
+<input name="dateE" value="{{ session.dateexpiration|date:"Y-m-d" }}">
+<br><br>
+Évaluation ?
+
+<input  type="hidden" value="False" name="eva">
+{% if session.evaluation%}
+<input type="checkbox" name="eva" value="True" checked>
+{% else%}
+<input type="checkbox" name="eva" value="True">
+{% endif %} 
+<br>
+Timer :<br>
+<input name="timer" value="{{ session.timer }}">
+<br><br>
+<input type="submit" value="Valider">
+</form>
+</div>
+
+</section>
+
+<footer class="container">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+         
+        </div>
+        <div class="col-sm m-5">
+          <a href="../gestion-session" class=" btn btn-secondary " role="button" data-bs-toggle="button" aria-pressed="true">Retour</a>
+  
+        </div>
+        <div class="col-sm">
+         
+        </div>
+      </div>
+    </div>
+    
+   
+  </footer>
+
+{% endblock %}
